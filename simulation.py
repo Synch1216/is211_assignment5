@@ -1,4 +1,5 @@
 __author__ = 'malcolmbarnes'
+__author__ = 'malcolmbarnes'
 
 import csv
 import urllib2
@@ -28,9 +29,9 @@ class Server:
         self.time_remaining= new_task.get_pages() * 60/ self.page_rate
 
 class Request:
-    def __init__(self):
-        self.timestamp = seconds
-        self.second= process_time
+    def __init__(self, arrival, duration):
+        self.timestamp = arrival
+        self.process_time= duration
 
     def get_stamp(self):
         return self.timestamp
@@ -60,30 +61,26 @@ class Queue:
         return len(self, items)
 
 
-def simulateOneServer(url):
+def simulateOneServer():
     server = Server()
     print_queue = Queue()
 
     waiting_times= []
+    t= []
 
-    for line in url:
-        time = int(line[0])
-        queue.enqueue(line)
-
-        print ('time')
+    with open('/Users/malcolmbarnes/Desktop/therequests.csv') as csvfile:
+        reader= csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            print row
 
 def main():
-    url_parser = argparse.ArgumentParser()
-    url_parser.add_argument("--file", help='url', type=str)
-    args= url_parser.parse_args()
-
-    url = csv.reader(urllib2.urlopen(args))
-    simulateOneServer(url)
+    simulateOneServer()
 
 
 
 
 if __name__ == '__main__':
     main()
+
 
 
